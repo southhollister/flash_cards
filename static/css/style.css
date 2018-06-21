@@ -1,0 +1,90 @@
+* {
+    font-family: sans-serif;
+}
+
+#wrapper {
+    background-color: #F4F6F6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+#wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.choice {
+    width: 100%;
+    min-width: 250px;
+    margin: auto;
+    display: inline-block;
+    /*float: left;*/
+    height: 70%;
+    background-color: #F4F6F6;
+}
+
+.choice h2 {
+    text-align: center;
+    font-size: 5em;
+    margin-top: 20%;
+}
+
+#new {
+   border-bottom: 10px solid #ccc;
+   min-height:40%;
+   width: 90%;
+   margin: 20% auto 0px;
+}
+
+#cross {
+  background: red;
+  height: 300px;
+  position: relative;
+  left: 50%;
+  width: 60px;
+  display: block;
+}
+
+#cross:after {
+  background: red;
+  content: "";
+  height: 60px;
+  position: absolute;
+  width: 300px;
+  top: 120px;
+  left: -120px;
+  display: block;
+}
+
+#play {
+    border-top: 10px solid #ccc;
+    min-height: 40%;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20%;
+}
+
+#arrow {
+	width: 0;
+	height: 0;
+	border-top: 150px solid transparent;
+	border-left: 300px solid red;
+	border-bottom: 150px solid transparent;
+	display: block;
+	margin: 0 auto;
+}
+
+
+/* Create Card*/
+#upload {
+    width: 0;
+	height: 0;
+	border-top: 150px solid transparent;
+	border-left: 300px solid red;
+	border-bottom: 150px solid transparent;
+	display: block;
+	margin: 0 auto;
+}
+

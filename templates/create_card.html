@@ -1,0 +1,21 @@
+{% extends index.html %}
+
+{% block title %}
+<title>Title</title>
+{% end %}
+
+{% block body %}
+<div class="choice">
+    <div id="upload">
+        <a href="#"
+    </div>
+</div>
+<div class="choice" id="answer">
+    <h2>Answer:</h2>
+    <form id="form" method="POST">
+        <textarea type="text" name="input-bar"></textarea>
+        {% module xsrf_form_html() %}
+        <button id="submit-button" type="submit" value="Save">Save</button>
+    </form>
+</div>
+{% end %}

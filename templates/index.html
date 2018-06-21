@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block page_title %}
+    <title>Flash Cards</title>
+    {% end %}
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+    <div id="wrapper">
+       {% block body %}
+        <div class="choice">
+            <div id="new">
+                <a href="/create_card.html" id="cross"></a>
+                <a href="/create_card.html"><h2>Create a flash card</h2></a>
+            </div>
+
+        </div>
+        <div class="choice">
+            <div id="play">
+                <a href="#" id="arrow"></a>
+                <a href="#"><h2>Play flash cards</h2></a>
+            </div>
+        </div>
+        {% end %}
+    </div>
+</body>
+</html>
