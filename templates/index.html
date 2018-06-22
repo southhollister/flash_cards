@@ -6,25 +6,50 @@
     <title>Flash Cards</title>
     {% end %}
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../static/js/scripts.js"></script>
 </head>
 <body>
     <div id="wrapper">
         {% block body %}
-        <div id="login">
+        <div class="login">
+            <form class="form" method="POST">
+                <h1>Login</h1>
+                <label for="username">
+                    Username:
+                </label>
+                <input type="text" id="username" name="username">
+                <label for="password">
+                    Password:
+                </label>
+                <input type="text" id="password" name="password">
 
-            <form id="form" method="POST">
-                <h2>Login</h2>
-                <p>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username">
-                </p>
-                <p>
-                    <label for="password">Password:</label>
-                    <input type="text" id="password" name="password">
-                </p>
                 {% module xsrf_form_html() %}
-                <button id="login-button" type="submit" value="Login">Login</button>
+                <button class="form-button" type="submit" value="Login">Login</button>
+                <p id="sign-up">Sign Up</p>
             </form>
+        </div>
+        <div class="overlay" >
+            <div id="sign-up-overlay" class="login">
+                <form class="form" method="POST">
+                    <label for="uname">
+                        Username:
+                    </label>
+                    <input type="text" id="uname" name="username">
+                    <label for="pword">
+                        Password:
+                    </label>
+                    <input type="text" id="pword" name="password">
+                    <p class="pword-require">Password requires:
+                        <ul class="pword-require">
+                            <li>At least 8 characters</li>
+                            <li>Alphanumeric characters only</li>
+                        </ul>
+                    </p>
+                    {% module xsrf_form_html() %}
+                    <button class="form-button" id="sign-up-button" type="submit" value="Login">Sign Up</button>
+                </form>
+            </div>
         </div>
         {% end %}
     </div>
