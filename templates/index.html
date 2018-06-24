@@ -26,7 +26,7 @@
 
                 {% module xsrf_form_html() %}
                 <button class="form-button" type="submit" value="Login">Login</button>
-                <p id="sign-up">Sign Up</p>
+                <p class="sign-up">Sign Up</p>
             </form>
         </div>
         <div class="overlay" >
@@ -35,13 +35,19 @@
                     <label for="uname">
                         Username:
                     </label>
-                    <input type="text" id="uname" name="username">
+                    <input type="text" id="uname" name="username" placeholder="Enter Username">
+                     <p class="requirements" id="username-requirements">Username requires:
+                        <ul>
+                            <li>Alphanumeric characters only</li>
+                        </ul>
+                    </p>
                     <label for="pword">
                         Password:
                     </label>
-                    <input type="text" id="pword" name="password">
-                    <p class="pword-require">Password requires:
-                        <ul class="pword-require">
+                    <input type="text" id="pword" name="password" placeholder="Enter Password">
+                    <input type="text" id="pword-repeat" name="password" placeholder="Re-enter Password">
+                    <p>Password requires:
+                        <ul class="requirements" id="password-requirements">
                             <li>At least 8 characters</li>
                             <li>Alphanumeric characters only</li>
                         </ul>

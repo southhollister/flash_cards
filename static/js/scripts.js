@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#sign-up').click(function(){
+    $('p.sign-up').click(function(){
         $('.overlay').fadeToggle('slow');
     });
 
