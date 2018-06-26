@@ -12,7 +12,7 @@ log_level = getattr(logging, log_level.upper(), 10)
 logging.basicConfig(
     filename='main_log.log',
     level=log_level,
-    format='%(asctime)s:%(levelname)s:%(funcName)s:%(lineNo)d:%(message)s',
+    format='%(asctime)s:%(levelname)s:%(funcName)s:%(lineno)d:%(message)s',
     datefmt='%m/%d/%Y %I:%M:%S'
 )
 # Making my life easier
@@ -33,12 +33,12 @@ class BaseHandler(tornado.web.RequestHandler):
         conn = sql.connect('cards.db')
         cur = conn.cursor()
         log(debug, 'DB connected!')
-        cur.execute(
+        cur.executescript(
             """
             create table if not exists users (
-                id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT UNIQUE;
-                username TEXT UNIQUE;
-                password TEXT UNIQUE;
+                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                username TEXT UNIQUE,
+                password TEXT UNIQUE
             );
             """
         )
@@ -49,18 +49,38 @@ class BaseHandler(tornado.web.RequestHandler):
 
         conditions = [
             not all(map(lambda x: x not in disallowed, list(username))),
-            cur.fetchone()[0]
+            cur.fetchone() is not None
         ]
+        log(debug, conditions)
         if any(conditions):
             valid_username = False
 
+        # validate password
+        conditions = [
+            not all(map(lambda x: x not in disallowed, list(password))),
+            len(password) < 8
+        ]
+        log(debug, conditions)
+        if any(conditions):
+            valid_password = False
+
+        if valid_password and valid_username:
+            cur.execute('insert into users (username, password) values (?, ?)', (username, password))
+            conn.commit()
+            conn.close()
+            self.render('index.html')
+        else:
+            self.write('Uh Oh! Username: %s|| Password: %s' % (username, password))
 
 
 class SignUp(BaseHandler):
     """Sign up handler"""
 
     def post(self):
-        pass
+        self.sign_up(
+            self.get_body_argument('username'),
+            self.get_body_argument('password')
+        )
 
 
 class HomePage(BaseHandler):
@@ -92,7 +112,8 @@ def main():
 
     application = tornado.web.Application([
         (r"/", HomePage),
-        (r"/create_card.html", CreateCard)
+        (r"/create_card.html", CreateCard),
+        (r"/sign_up", SignUp)
     ], **settings)
 
     application.listen(int(os.environ.get('PORT', 5000)))
