@@ -15,6 +15,9 @@
         <div class="login">
             <form class="form" method="POST">
                 <h1>Login</h1>
+                {% if invalid_uname_or_pass %}
+                <p class="invalid-input smaller">Invalid username or password</p>
+                {% end %}
                 <label for="username">
                     Username:
                 </label>
@@ -29,25 +32,26 @@
                 <p class="sign-up">Sign Up</p>
             </form>
         </div>
-        <div class="overlay" >
+        <div class="overlay" style="display:{{overlay}};">
             <div id="sign-up-overlay" class="login">
+
                 <form class="form" action="/sign_up" method="POST">
                     <label for="uname">
-                        Username:
+                        Username: {% if username_taken %}<p class="invalid-input smaller">*Username unavailable</p>{% end %}
                     </label>
                     <input type="text" id="uname" name="username" placeholder="Enter Username">
-                     <p class="requirements" id="username-requirements">Username requires:
-                        <ul>
+                    <p>Username requires:
+                        <ul {% if errors and "username" in errors %}class="requirements invalid-input" {% else %} class="requirements" {% end %} id="username-requirements">
                             <li>Alphanumeric characters only</li>
                         </ul>
                     </p>
                     <label for="pword">
                         Password:
                     </label>
-                    <input type="text" id="pword" name="password" placeholder="Enter Password">
-                    <input type="text" id="pword-repeat" name="password" placeholder="Re-enter Password">
+                    <input type="password" id="pword" name="password" placeholder="Enter Password">
+                    <input type="password" id="pword-repeat" name="password-repeat" placeholder="Re-enter Password">
                     <p>Password requires:
-                        <ul class="requirements" id="password-requirements">
+                        <ul {% if errors and "password" in errors %}class="requirements invalid-input" {% else %} class="requirements" {% end %} id="password-requirements">
                             <li>At least 8 characters</li>
                             <li>Alphanumeric characters only</li>
                         </ul>

@@ -23,6 +23,11 @@ a {
     height: 100%;
     display: none;
 }
+.smaller {
+   font-size: smaller;
+   margin: 0;
+}
+
 /* Login and sign up */
 .login {
     width: 60%;
@@ -87,6 +92,10 @@ p.sign-up {
 
 #sign-up-overlay {
     height: 50%;
+}
+
+.invalid-input {
+    color: red;
 }
 
 /* Home Page */
